@@ -1,0 +1,13 @@
+- name: Install required packages
+  apt:
+    name: curl
+    state: present
+    update_cache: yes
+
+- name: Download Helm installation script
+  get_url:
+    url: https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+    dest: /usr/local/bin/get_helm.sh
+    mode: '0700'
+  notify: 
+    - Run Helm installation script

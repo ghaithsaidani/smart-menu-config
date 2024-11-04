@@ -1,0 +1,7 @@
+- name: Download the latest release of kubectl
+  get_url:
+    url: "https://dl.k8s.io/release/{{ kubectl_version }}/bin/linux/amd64/kubectl"
+    dest: /usr/local/bin/kubectl
+    mode: '0755'
+  vars:
+    kubectl_version: "{{ lookup('pipe', 'curl -L -s https://dl.k8s.io/release/stable.txt') }}"

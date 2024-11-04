@@ -1,0 +1,50 @@
+- name: update apt package cache
+  apt:
+    update_cache: yes
+
+- name: install prerequisite
+  apt:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - openjdk-17-jdk
+
+- name: Add Jenkins apt repository key
+  ansible.builtin.get_url:
+    url: https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
+    dest: /usr/share/keyrings/jenkins-keyring.asc
+    mode: "0644"
+
+- name: add Jenkins apt repo
+  ansible.builtin.copy:
+    content: |
+      deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] https://pkg.jenkins.io/debian-stable binary/
+    dest: /etc/apt/sources.list.d/jenkins.list
+    mode: "0644"
+
+- name: update apt cache after adding Jenkins repo
+  apt:
+    update_cache: yes
+
+- name: install Jenkins
+  apt:
+    name: jenkins
+    state: present
+
+- name: ensure Jenkins is started
+  systemd:
+    name: jenkins
+    enabled: yes
+    state: started
+
+- name: Add Jenkins user to Docker group
+  user:
+    name: jenkins
+    groups: docker
+    append: yes
+
+- name: Add Jenkins user to sudoers with Docker permissions
+  copy:
+    content: "jenkins ALL=(ALL) NOPASSWD: /usr/bin/docker, /usr/local/bin/docker-compose\n"
+    dest: /etc/sudoers.d/jenkins
+    mode: "0440"

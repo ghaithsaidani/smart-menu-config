@@ -1,0 +1,10 @@
+- name: Basic Handlers
+  hosts: all
+  become: true
+  roles:
+    - base
+    - docker
+    - jenkins
+    - k8s
+    - helm
+  

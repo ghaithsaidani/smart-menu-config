@@ -1,0 +1,7 @@
+- name: Restart Jenkins and Docker services
+  systemd:
+    name: "{{ item }}"
+    state: restarted
+  loop:
+    - jenkins
+    - docker

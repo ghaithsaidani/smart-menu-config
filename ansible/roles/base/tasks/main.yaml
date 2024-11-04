@@ -1,0 +1,13 @@
+- name: update package cache
+  apt:
+    update_cache: yes
+- name: Install dependencies
+  apt:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - git
+    - curl
+    - python3
+- name: Install Azure-cli
+  shell: 'curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash' 

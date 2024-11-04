@@ -1,0 +1,2 @@
+- name: Run Helm installation script
+  command: /usr/local/bin/get_helm.sh
