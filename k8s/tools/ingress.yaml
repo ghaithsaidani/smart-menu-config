@@ -20,5 +20,5 @@ spec:
                   number: 8080
   # tls:
   #   - hosts:
-  #       - "jenkins.4.209.178.97.nip.io"
+  #       - "jenkins.you-ip-address.nip.io" # change with jenkins.your-ip-adress.nip.io (this comment is from me not from chatGPT)
   #     secretName: jenkins-tls-secret
