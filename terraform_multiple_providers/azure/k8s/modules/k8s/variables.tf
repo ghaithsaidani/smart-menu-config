@@ -27,11 +27,11 @@ variable "service_cidr" {
   type = string
 }
 
-/* variable "app_id" {
+/* variable "scope" {
   type = string
-}
+} */
 
 
-variable "client_secret" {
+/* variable "ssh_public_key" {
   type = string  
 } */

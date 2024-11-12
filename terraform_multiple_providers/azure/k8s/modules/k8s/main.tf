@@ -15,11 +15,6 @@ resource "azurerm_kubernetes_cluster" "aks" {
     type = "SystemAssigned"
   }
 
-  /* service_principal {
-    client_id = var.app_id
-    client_secret = var.client_secret
-  } */
-
   network_profile {
     network_plugin = "azure"
     service_cidr   = var.service_cidr

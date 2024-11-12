@@ -1,72 +1,73 @@
 variable "resource_group_name" {
-  default = "smart-menu-rg"
+  default = "" # resource group name (string)
 }
 
 variable "location" {
-  default = "northeurope"
+  default = "" # resource group location (string)
 }
 
 variable "vnet_name" {
-  default = "smart-menu-vnet"
+  default = "" # virtual network name (string)
 }
 
 variable "vnet_address_space" {
-  default = "10.0.0.0/16"
+  default = "" # virtual network address space example 10.0.0.0/16 (string)
 }
 
 variable "subnet_name" {
-  default = "smart-menu-subnet"
+  default = "" # subnet name (string)
 }
 
 variable "subnet_address_prefixes" {
-  default = ["10.0.1.0/24"]
+  default = [] # subnet address prefixes example ["10.0.1.0/24"] (list of string)
 }
 
-variable "public_ip_name" {
-  default = "public-ip-vm"
-}
 
-variable "nic_name" {
-  default = "nic-vm"
-}
 
 variable "acr_name" {
-  default = "SmartMenuAcr"
+  default = "" # azure registry containers name (string) is contains only alphabetic 
 }
 
 variable "aks_name" {
-  default = "smart-menu-aks"
+  default = "" # azure kubernetes service name (string)
 }
 
 variable "dns_prefix" {
-  default = "smartmenu"
+  default = "" # dns prefix (string)
 }
 
 variable "node_count" {
-  default = 2
+  default = 2 # number of nodes in my cluster (number)
 }
 
 variable "acr_sku" {
-  default = "Basic"
+  default = "" # azure registry container service type example Basic (string)
 }
 
 variable "service_cidr" {
-  default = "10.1.0.0/16"
+  default = "" # service cidr example 10.0.0.0/16
 }
 
+# those variables for my first approach when i add another seperate vm to make the task of running pipeline but after that i used a pod and distributed agents
+# that runs on my kubernetes cluster
+
 variable "nsg-name" {
-  default = "jenkins-vm-nsg"
+  default = "" # network security group name (string)
 }
 
 variable "vm_name" {
-  default = "jenkins-vm"
+  default = "" # vm name (string)
 }
 
 variable "username" {
-  default = "ghaith"
+  default = "" # username of vm (string)
 }
 
-variable "ad-app-name" {
-  default = "jenkins-role-hey"
+variable "public_ip_name" {
+  default = "" # public ip name (string)
+}
+
+variable "nic_name" {
+  default = "" # network interface for vm name (string)
 }
 

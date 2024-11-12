@@ -1,7 +1,22 @@
-resource "random_string" "aks_sp_secret" {
-  length = 16
-  special = true
+terraform {
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "~> 3.116.0"
+    }
+  }
+
+  required_version = ">=1.1.0"
 }
+
+provider "azuread" {
+  
+}
+
+provider "azurerm" {
+  features {}
+}
+
 
 module "resource-group" {
   source = "./modules/resource_groups"
@@ -38,17 +53,11 @@ module "aks" {
   node_count = var.node_count
   subnet_id = module.network.subnet_id
   service_cidr = var.service_cidr
-  //app_id = module.global.client_id
-  //client_secret = module.global.client_secret
   //ssh_public_key = file("~/.ssh/k8s-vms-key")
 }
 
-
-
-
-// you can add both of these modules if you want to run jenkins on a seperate virtual machine
-/* module "security" {
-  source = "./modules/security"
+/* module "nsg" {
+  source = "./modules/nsg"
   nsg-name = var.nsg-name
   resource_group_name = module.resource-group.resource_group_name
   location = var.location
@@ -63,13 +72,12 @@ module "vms" {
   username = var.username
   network_interface_ids = [module.network.nic-id]
   host = module.network.public-ip-address
-} */ 
-/* module "global" {
-  source = "./modules/global"
+} */
+
+module "iam" {
+  source = "./modules/iam"
   principal_id = module.aks.principal_id
   scope = module.docker-registry.acr_id
-  /* ad-app-name = var.ad-app-name
+  ad-app-name = var.ad-app-name
   aks_cluster = module.aks.aks_cluster_id
-  svc_principal_password = random_string.aks_sp_secret.result
-  az_app_password = random_string.aks_sp_secret.result 
-}  */
+}

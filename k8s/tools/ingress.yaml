@@ -3,18 +3,22 @@ kind: Ingress
 metadata:
   name: devops-tools-ingress
   namespace: devops-tools
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
+  # annotations:
+  #   nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   ingressClassName: nginx
   rules:
-    - host: "jenkins.nip.io" # change with jenkins.your-ip-adress.nip.io (this comment is from me not from chatGPT)
+    - host: "jenkins.you-ip-address.nip.io" # change with jenkins.your-ip-adress.nip.io (this comment is from me not from chatGPT)
       http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: jenkins
+                name: jenkins-service
                 port:
                   number: 8080
+  # tls:
+  #   - hosts:
+  #       - "jenkins.4.209.178.97.nip.io"
+  #     secretName: jenkins-tls-secret

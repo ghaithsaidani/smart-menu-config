@@ -3,29 +3,26 @@ kind: Ingress
 metadata:
   name: monitoring-ingress
   namespace: monitoring
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   ingressClassName: nginx
   rules:
-    - host: "prometheus.nip.io" # change with prometheus.your-ip-adress.nip.io (this comment is from me not from chatGPT)
+    - host: "prometheus.your-ip-address.nip.io" # change with prometheus.your-ip-adress.nip.io (this comment is from me not from chatGPT)
       http:
         paths:
-          - path: /
-            pathType: Prefix
+          - pathType: Prefix
             backend:
               service:
                 name: prometheus-server
                 port:
                   number: 80
-    - host: "grafana.nip.io" # change with grafana.your-ip-adress.nip.io (this comment is from me not from chatGPT)
+            path: /
+    - host: "grafana.your-ip-address.nip.io" # change with grafana.your-ip-adress.nip.io (this comment is from me not from chatGPT)
       http:
         paths:
-          - path: /
-            pathType: Prefix
+          - pathType: Prefix
             backend:
               service:
                 name: grafana
                 port:
                   number: 80
-          
+            path: /
