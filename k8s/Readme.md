@@ -86,21 +86,23 @@ In Jenkins, you need to add two credentials:
    - Choose **Secret text** and enter your **GitHub token**.
 
 2. **Azure Service Principal Credential**:
-   - First, create a Service Principal in Azure that Jenkins will use to authenticate:
+   - First, create a Service Principal in Azure for Jenkins to use for authentication:
      1. Open your Azure CLI or go to the **Azure Portal**.
      2. Run the following command to create a Service Principal:
         ```bash
         az ad sp create-for-rbac --name "jenkins-sp" --role Contributor --scopes /subscriptions/{your-subscription-id}
         ```
-     3. Note the output values for **appId**, **password**, and **tenant**, as these will be needed in Jenkins.
+     3. Note the output values for **appId** (Client ID), **password** (Client Secret), **tenant** (Tenant ID), and **subscription** (Subscription ID), as these will be needed in Jenkins.
 
    - Next, set up the **Azure Service Principal Credential** in Jenkins:
      - Go to *Manage Jenkins* → *Manage Credentials*.
      - Select **(global)** → **Add Credentials**.
-     - Choose **Username and Password**.
-     - Use the **appId** as the **Username** and the **password** as the **Password**.
-     - Add the **tenant** information under the **Description** or another relevant field if available.
-
+     - Choose **Azure Service Principal** as the credential type.
+     - Enter the following values:
+       - **Subscription ID**: Your Azure Subscription ID.
+       - **Client ID**: The `appId` from the Service Principal output.
+       - **Client Secret**: The `password` from the Service Principal output.
+       - **Tenant ID**: The `tenant` from the Service Principal output.
 
 ### 8. Create and Run a Jenkins Pipeline
 
