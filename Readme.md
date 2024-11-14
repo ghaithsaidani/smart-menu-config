@@ -2,7 +2,7 @@
 
 This project provides an end-to-end DevOps automation solution, which includes the setup of Azure infrastructure using Terraform, Kubernetes configurations for managing applications on AKS (Azure Kubernetes Service), monitoring tools (Prometheus and Grafana), and Ansible playbooks for dependency installations on virtual machines. 
 
-The project is organized into four main directories:
+The project is organized into three main directories:
 
 1. **terraform/**: Contains the infrastructure setup for Azure resources using Terraform.
 2. **k8s/**: Contains Kubernetes configurations for deploying applications, including Jenkins, monitoring tools (Prometheus and Grafana), and ingress setup.
