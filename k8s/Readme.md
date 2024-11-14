@@ -69,7 +69,7 @@ kubectl apply -f tools/
    - Follow the instructions from [DevOpsCube](https://devopscube.com/jenkins-build-agents-kubernetes/) to configure Jenkins to use Kubernetes.
 
 3. **Pod Template**:
-   - For the **Pod Template**, use the image `ghaithsaidani/jenkinsagent:latest`. Alternatively, you can build and push your own agent image from the `Dockerfile` located in the `tools/agent/` folder.
+   - For the **Pod Template**, use the image `ghaithsaidani/jenkins-agent:latest`. Alternatively, you can build and push your own agent image from the `Dockerfile` located in the `tools/agent/` folder.
 
 4. **Add Azure Tenant Credentials**:
    - In Jenkins, add two credentials:
