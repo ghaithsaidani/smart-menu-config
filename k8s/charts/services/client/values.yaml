@@ -15,12 +15,6 @@ ingress:
   ip: "68.219.13.224"
 
 
-volume:
-  name: services-volume
-  mountPath: /client
-  persistentVolumeClaim: client-pvc
-  storage: 2Gi
-
 
 resources:
   requests:

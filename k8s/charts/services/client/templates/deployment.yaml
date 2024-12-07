@@ -25,10 +25,12 @@ spec:
             memory: {{ .Values.resources.limits.memory }}
         ports:
         - containerPort: {{ .Values.service.port }}
-        volumeMounts:
+        {{- /*
+ volumeMounts:
         - name: {{ .Values.volume.name }}
           mountPath: {{ .Values.volume.mountPath }}
       volumes:
       - name: {{ .Values.volume.name }}
         persistentVolumeClaim:
-          claimName: {{ .Values.volume.persistentVolumeClaim }}
+          claimName: {{ .Values.volume.persistentVolumeClaim }} 
+*/ -}}
