@@ -3,8 +3,10 @@ kind: Ingress
 metadata:
   name: {{ .Values.chart.name }}-ingress
   namespace: default
-  annotations:
-    cert-manager.io/cluster-issuer: letsencrypt-prod
+  {{- /*
+ annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod 
+*/ -}}
 spec:
   ingressClassName: nginx
 {{- /*
