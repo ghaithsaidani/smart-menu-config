@@ -1,0 +1,75 @@
+# Persistent Volume Claim
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ .Release.Name }}-pv-claim
+  namespace: {{ .Values.namespace }}
+spec:
+  accessModes:
+    - {{ .Values.pvc.accessMode }}
+  resources:
+    requests:
+      storage: {{ .Values.pvc.storage }}
+
+# Deployment Config
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-deployment
+  namespace: {{ .Values.namespace }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}
+    spec:
+      serviceAccountName: {{ .Values.serviceAccountName }}
+      securityContext:
+        fsGroup: {{ .Values.security.fsGroup }}
+        runAsUser: {{ .Values.security.runAsUser }}
+      containers:
+        - name: {{ .Release.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          env:
+            - name: JAVA_OPTS
+              value: "{{ .Values.env.javaOpts }}"
+          resources:
+            limits:
+              memory: "{{ .Values.resources.limits.memory }}"
+              cpu: "{{ .Values.resources.limits.cpu }}"
+            requests:
+              memory: "{{ .Values.resources.requests.memory }}"
+              cpu: "{{ .Values.resources.requests.cpu }}"
+          ports:
+            - name: httpport
+              containerPort: {{ .Values.ports.http }}
+            - name: jnlpport
+              containerPort: {{ .Values.ports.jnlp }}
+          livenessProbe:
+            httpGet:
+              path: "/login"
+              port: {{ .Values.ports.http }}
+            initialDelaySeconds: {{ .Values.liveness.initialDelaySeconds }}
+            periodSeconds: {{ .Values.liveness.periodSeconds }}
+            timeoutSeconds: {{ .Values.liveness.timeoutSeconds }}
+            failureThreshold: {{ .Values.liveness.failureThreshold }}
+          readinessProbe:
+            httpGet:
+              path: "/login"
+              port: {{ .Values.ports.http }}
+            initialDelaySeconds: {{ .Values.readiness.initialDelaySeconds }}
+            periodSeconds: {{ .Values.readiness.periodSeconds }}
+            timeoutSeconds: {{ .Values.readiness.timeoutSeconds }}
+            failureThreshold: {{ .Values.readiness.failureThreshold }}
+          volumeMounts:
+            - name: jenkins-data
+              mountPath: /var/jenkins_home   
+      volumes:
+        - name: jenkins-data
+          persistentVolumeClaim:
+              claimName: {{ .Release.Name }}-pv-claim

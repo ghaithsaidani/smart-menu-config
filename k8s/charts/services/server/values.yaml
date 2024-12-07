@@ -1,0 +1,21 @@
+chart:
+  name: smart-menu-server
+replicaCount: 1
+
+image:
+  repository: smartmenuacr.azurecr.io/smart-menu-server
+  tag: "1"
+  pullPolicy: Always
+
+service:
+  type: ClusterIP
+  port: 3010
+
+ingress:
+  ip: "68.219.13.224"
+
+resources:
+  requests:
+    memory: "512Mi"
+  limits:
+    memory: "1Gi"

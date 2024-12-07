@@ -1,23 +1,13 @@
 terraform {
   required_providers {
     azurerm = {
-      source  = "hashicorp/azurerm"
-      version = "~> 3.116.0"
-    }
-
-    random = {
-        source = "hashicorp/random"
-        version = "~> 3.6.3"
+        source = "hashicorp/azurerm"
+        version = "4.10.0"
     }
   }
-
-  required_version = ">=1.1.0"
-}
-
-provider "azuread" {
-  
 }
 
 provider "azurerm" {
   features {}
+  subscription_id = var.subscription_id
 }

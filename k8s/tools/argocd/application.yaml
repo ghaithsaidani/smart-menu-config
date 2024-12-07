@@ -1,0 +1,122 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: discovery-service
+  namespace: devops-tools
+spec:
+  project: default
+  source:
+    repoURL: https://gitlab.com/microservices-social-media/deployment.git
+    targetRevision: HEAD
+    path: k8s/charts/services/discovery-service
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+
+
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: api-gateway
+  namespace: devops-tools
+spec:
+  project: default
+  source:
+    repoURL: https://gitlab.com/microservices-social-media/deployment.git
+    targetRevision: HEAD
+    path: k8s/charts/services/api-gateway
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+
+
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: user-service
+  namespace: devops-tools
+spec:
+  project: default
+  source:
+    repoURL: https://gitlab.com/microservices-social-media/deployment.git
+    targetRevision: HEAD
+    path: k8s/charts/services/user-service
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+
+
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: post-service
+  namespace: devops-tools
+spec:
+  project: default
+  source:
+    repoURL: https://gitlab.com/microservices-social-media/deployment.git
+    targetRevision: HEAD
+    path: k8s/charts/services/post-service
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: connections-service
+  namespace: devops-tools
+spec:
+  project: default
+  source:
+    repoURL: https://gitlab.com/microservices-social-media/deployment.git
+    targetRevision: HEAD
+    path: k8s/charts/services/connections-service
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: notification-service
+  namespace: devops-tools
+spec:
+  project: default
+  source:
+    repoURL: https://gitlab.com/microservices-social-media/deployment.git
+    targetRevision: HEAD
+    path: k8s/charts/services/notification-service
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    

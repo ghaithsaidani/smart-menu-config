@@ -1,6 +1,6 @@
-resource "azurerm_linux_virtual_machine" "vm" {
+resource "azurerm_linux_virtual_machine" "smart-menu-vm" {
   name                = var.vm_name
-  resource_group_name = var.rg_name
+  resource_group_name = var.resource_group_name
   location            = var.location
   size                = "Standard_B1ms"
   admin_username      = var.username
@@ -8,7 +8,7 @@ resource "azurerm_linux_virtual_machine" "vm" {
     username   = var.username
     public_key = file("~/.ssh/vm-azure-key.pub")
   }
-  network_interface_ids = [ var.network_interface_id ] //[azurerm_network_interface.smart-menu-nic.id]
+  network_interface_ids = var.network_interface_ids //[azurerm_network_interface.smart-menu-nic.id]
 
   os_disk {
     caching              = "ReadWrite"

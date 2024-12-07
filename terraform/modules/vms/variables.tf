@@ -2,7 +2,7 @@ variable "vm_name" {
   type = string
 }
 
-variable "resource_group_name" {
+variable "rg_name" {
   type = string
 }
 
@@ -14,8 +14,8 @@ variable "username" {
   type = string
 }
 
-variable "network_interface_ids" {
-  type = list(string)
+variable "network_interface_id" {
+  type = string
 }
 
 variable "host" {

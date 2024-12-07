@@ -1,0 +1,53 @@
+namespace: devops-tools
+createNamespace: true
+replicaCount: 1
+serviceAccountName: jenkins-admin
+
+image:
+  repository: jenkins/jenkins
+  tag: lts
+
+pvc:
+  accessMode: ReadWriteOnce
+  storage: 50Gi
+
+security:
+  fsGroup: 1000
+  runAsUser: 1000
+
+env:
+  javaOpts: "-Djavax.net.ssl.trustStore=/var/jenkins_home/minikube-truststore.jks -Djavax.net.ssl.trustStorePassword=changeit"
+
+resources:
+  limits:
+    memory: "2Gi"
+    cpu: "1000m"
+  requests:
+    memory: "500Mi"
+    cpu: "500m"
+
+ports:
+  http: 8080
+  jnlp: 50000
+
+liveness:
+  initialDelaySeconds: 90
+  periodSeconds: 10
+  timeoutSeconds: 5
+  failureThreshold: 5
+
+readiness:
+  initialDelaySeconds: 60
+  periodSeconds: 10
+  timeoutSeconds: 5
+  failureThreshold: 3
+
+service:
+  type: ClusterIP
+  annotations:
+    scrape: 'true'
+    path: /
+    port: '8080'
+
+ingress:
+  hostname: jenkins.68.219.13.224.nip.io
