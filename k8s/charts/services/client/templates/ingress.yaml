@@ -7,10 +7,12 @@ metadata:
     cert-manager.io/cluster-issuer: letsencrypt-prod
 spec:
   ingressClassName: nginx
-  tls:
+{{- /*
+   tls:
     - hosts:
         - "{{ .Values.chart.name }}.{{ .Values.ingress.ip }}.nip.io"
-      secretName: {{ .Values.chart.name }}-tls
+      secretName: {{ .Values.chart.name }}-tls 
+*/ -}}
   rules:
     - host: "{{ .Values.chart.name }}.{{ .Values.ingress.ip }}.nip.io"
       http:
