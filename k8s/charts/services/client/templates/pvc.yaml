@@ -4,7 +4,7 @@ metadata:
   name: {{ .Values.volume.persistentVolumeClaim }}
 spec:
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   resources:
     requests:
       storage: {{ .Values.volume.storage | default "500Mi" }}
