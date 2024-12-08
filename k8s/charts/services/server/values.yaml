@@ -8,8 +8,9 @@ image:
   pullPolicy: Always
 
 service:
-  type: ClusterIP
-  port: 3010
+  type: LoadBalancer
+  port: 80
+  targetPort: 3010
 
 ingress:
   ip: "68.219.13.224"
