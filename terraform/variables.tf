@@ -109,3 +109,8 @@ variable "vm_name" {
 variable "vm_username" {
   type = string
 }
+
+# nsg
+variable "nsg_name" {
+  type = string
+}

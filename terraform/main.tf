@@ -38,6 +38,15 @@ module "aks" {
 }
 
 
+module "security" {
+  source = "./modules/nsg"
+  nsg-name = var.nsg_name
+  resource_group_name = module.rg.rg_name
+  location = var.location
+  nic-id = module.network.nic_id
+}
+
+
 module "vms" {
   source = "./modules/vms"
   rg_name = module.rg.rg_name
